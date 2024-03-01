@@ -271,7 +271,7 @@ class MyCustomUI:
         
                
         self.root = ctk.CTk()
-        self.root.title("My Custom UI")
+        self.root.title("Gear Calculator")
         self.root.geometry("1024x768")  # Set the window size
         
         leftframe = ctk.CTkScrollableFrame(self.root)

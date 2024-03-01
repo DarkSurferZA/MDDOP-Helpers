@@ -14,6 +14,7 @@ class MyCustomUI:
                     val = float(moduletext_field.get()) * 22 / 7
                     circularpitchtext_field.delete(0, ctk.END)
                     circularpitchtext_field.insert(0, val)
+                    centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Circular Pitch (p) using Module (M) * pi")
                     return True
             except Exception as e:
                 print(str("e"))
@@ -25,6 +26,7 @@ class MyCustomUI:
                     val = float(toothwidthtext_field.get()) * 2
                     circularpitchtext_field.delete(0, ctk.END)
                     circularpitchtext_field.insert(0, val)
+                    centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Circular Pitch (p) using Tooth Thicknes (t) * 2")
                     return True
             except Exception as e:
                 print(str("e"))
@@ -37,11 +39,66 @@ class MyCustomUI:
                     val = float(pcdtext_field.get()) * float(moduletext_field.get())
                     teethcounttext_field.delete(0, ctk.END)
                     teethcounttext_field.insert(0, val)
+                    centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Number of teeth using Module (M) * Pitch Circle Diameter (PCD)")
                     return True
             except Exception as e:
                 print(str("e"))
                 return True
             return 0
+        
+        def calcSD():
+            # given key width
+            try:
+                if sdtext_field.get() == "0" and isinstance(float(kwidthtext_field.get()), numbers.Number) and float(kwidthtext_field.get()) > 0:
+                    val = float(kwidthtext_field.get()) * 4
+                    sdtext_field.delete(0, ctk.END)
+                    sdtext_field.insert(0, val)
+                    centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Shaft Diameter using Key Width * 4")
+                    return True
+            except Exception as e:
+                print(str("e"))
+                return True
+        
+        # given key depth
+            try:
+                if sdtext_field.get() == "0" and isinstance(float(kdepthtext_field.get()), numbers.Number) and float(kdepthtext_field.get()) > 0:
+                    val = float(kdepthtext_field.get()) * 12
+                    sdtext_field.delete(0, ctk.END)
+                    sdtext_field.insert(0, val)
+                    centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Shaft Diameter using Key Depth * 12")
+                    return True
+            except Exception as e:
+                print(str("e"))
+                return True
+            return True
+        
+        def calcKWidth():
+            # given shaft Diameter
+            try:
+                if kwidthtext_field.get() == "0" and isinstance(float(sdtext_field.get()), numbers.Number) and float(sdtext_field.get()) > 0:
+                    val = float(sdtext_field.get()) / 4
+                    kwidthtext_field.delete(0, ctk.END)
+                    kwidthtext_field.insert(0, val)
+                    centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Key Width using Shaft Diameter / 4")
+                    return True
+            except Exception as e:
+                print(str("e"))
+                return True
+            return True
+        
+        def calcKDepth():
+            # given shaft Diameter
+            try:
+                if kdepthtext_field.get() == "0" and isinstance(float(sdtext_field.get()), numbers.Number) and float(sdtext_field.get()) > 0:
+                    val = float(sdtext_field.get()) / 12
+                    kdepthtext_field.delete(0, ctk.END)
+                    kdepthtext_field.insert(0, val)
+                    centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Key Depth using Shaft Diameter / 12")
+                    return True
+            except Exception as e:
+                print(str("e"))
+                return True
+            return True
         
         def calcAdd():
             try:
@@ -49,6 +106,7 @@ class MyCustomUI:
                     val = float(moduletext_field.get())
                     addtext_field.delete(0, ctk.END)
                     addtext_field.insert(0, val)
+                    centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Addendum using Module * 1")
                     return True
             except Exception as e:
                 print(str("e"))
@@ -60,6 +118,7 @@ class MyCustomUI:
                     val = float(moduletext_field.get()) * 1.25
                     dedtext_field.delete(0, ctk.END)
                     dedtext_field.insert(0, val)
+                    centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Dedendum using Module * 1.25")
                     return True
             except Exception as e:
                 print(str("e"))
@@ -71,6 +130,7 @@ class MyCustomUI:
                     val = float(moduletext_field.get()) * 0.3
                     frtext_field.delete(0, ctk.END)
                     frtext_field.insert(0, val)
+                    centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Fillet Radius using Module * 0.3")
                     return True
             except Exception as e:
                 print(str("e"))
@@ -82,6 +142,7 @@ class MyCustomUI:
                     val = float(circularpitchtext_field.get()) / 2
                     toothwidthtext_field.delete(0, ctk.END)
                     toothwidthtext_field.insert(0, val)
+                    centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Tooth Thickness (t) using Circular Pitch (P) / 2")
                     return True
             except Exception as e:
                 print(str("e"))
@@ -94,6 +155,7 @@ class MyCustomUI:
                     val = float(pcdtext_field.get()) / float(teethcounttext_field.get())
                     moduletext_field.delete(0, ctk.END)
                     moduletext_field.insert(0, val)
+                    centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Module using Pitch Circle Diameter (PCD) / Number of Teeth (T)")
                     return True
                 
                 # given Addendum
@@ -102,6 +164,7 @@ class MyCustomUI:
                         val = float(addtext_field.get())
                         moduletext_field.delete(0, ctk.END)
                         moduletext_field.insert(0, val)
+                        centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Module (M) using Addendum * 1")
                         return True
                 except Exception as e:
                     print(str("e"))
@@ -113,6 +176,7 @@ class MyCustomUI:
                         val = float(dedtext_field.get()) / 1.25
                         moduletext_field.delete(0, ctk.END)
                         moduletext_field.insert(0, val)
+                        centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Module (M) using Dedendum / 1.25")
                         return True
                 except Exception as e:
                     print(str("e"))
@@ -124,6 +188,7 @@ class MyCustomUI:
                         val = float(dedtext_field.get()) / 0.3
                         moduletext_field.delete(0, ctk.END)
                         moduletext_field.insert(0, val)
+                        centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Module (M) using Fillet Radius / 0.3")
                         return True
                 except Exception as e:
                     print(str("e"))
@@ -140,6 +205,7 @@ class MyCustomUI:
                     val = float(moduletext_field.get()) * float(teethcounttext_field.get())
                     pcdtext_field.delete(0, ctk.END)
                     pcdtext_field.insert(0, val)
+                    centralLogOutput.configure(text=centralLogOutput.cget("text")+"\r\nUpdating Pitch Circle Diameter (PCD) using Module (M) * Number of Teeth (T)")
                     return True
             except Exception as e:
                 print(e)
@@ -170,7 +236,17 @@ class MyCustomUI:
             # fillet radius
             frtext_field.delete(0, ctk.END)
             frtext_field.insert(0,0)
+            # Shaft Diameter
+            sdtext_field.delete(0, ctk.END)
+            sdtext_field.insert(0,0)
+            # Key Width
+            kwidthtext_field.delete(0, ctk.END)
+            kwidthtext_field.insert(0,0)
+            # Key Depth
+            kdepthtext_field.delete(0, ctk.END)
+            kdepthtext_field.insert(0,0)
             return True
+        
         
         def updateButtonClick():
             if calcButton._text == "Clear":
@@ -187,6 +263,9 @@ class MyCustomUI:
                     calcCircularPitch()
                     calcNumberOfTeeth()
                     calcToothWidth()
+                    calcSD()
+                    calcKDepth()
+                    calcKWidth()
             return True
             
         
@@ -198,6 +277,8 @@ class MyCustomUI:
         leftframe = ctk.CTkScrollableFrame(self.root)
         leftframe.pack(padx=60, pady=20, side="left", fill="y", expand=False)
         
+        centreFrame = ctk.CTkScrollableFrame(self.root)
+        centreFrame.pack(padx=60, pady=20, fill="both", expand=True)        
         
         # Create 12 labels and text fields
         calcButton = ctk.CTkButton(master=leftframe, text="Calculate", command=updateButtonClick)
@@ -295,9 +376,26 @@ class MyCustomUI:
         sdlabel.pack(pady=2, padx=5)
 
         sdtext_field = ctk.CTkEntry(master=otherVarsleftframe)
+        sdtext_field.insert(0, 0)
         sdtext_field.pack(pady=2, padx=5)
+        
+        kwidthlabel = ctk.CTkLabel(master=otherVarsleftframe, text="Key Width")
+        kwidthlabel.pack(pady=2, padx=5)
+
+        kwidthtext_field = ctk.CTkEntry(master=otherVarsleftframe)
+        kwidthtext_field.insert(0, 0)
+        kwidthtext_field.pack(pady=2, padx=5)
+        
+        kdepthlabel = ctk.CTkLabel(master=otherVarsleftframe, text="Key Depth")
+        kdepthlabel.pack(pady=2, padx=5)
+
+        kdepthtext_field = ctk.CTkEntry(master=otherVarsleftframe)
+        kdepthtext_field.insert(0, 0)
+        kdepthtext_field.pack(pady=2, padx=5)
 
         
+        centralLogOutput = ctk.CTkLabel(master=centreFrame, text="Output")
+        centralLogOutput.pack(pady=2, padx=5, fill="both", expand=True)
         
         #main loop
         self.root.mainloop()
